@@ -1,0 +1,10 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  entrypoint: 'bash'
+  args: ['-c', 'docker build -t gcr.io/$PROJECT_ID/npm-package:${SHORT_SHA} . --build-arg GITHUB_AUTH_TOKEN=$$GITHUB_AUTH_TOKEN']
+  dir: 'app'
+  secretEnv: ['GITHUB_AUTH_TOKEN']
+secrets:
+  - kmsKeyName: projects/gkerocks/locations/global/keyRings/GIT_TOKEN/cryptoKeys/GITHUB_AUTH_TOKEN
+    secretEnv:
+      GITHUB_AUTH_TOKEN: 'CiQAq6D85OpSSBGCc1Cv4dTd2zVaRmpYI1Wxrni3A9XQp6AolesSUQASU/l5OhxB5QoMYYChNKq9qx7c9u47RDz6RwANBAE+yoCPs2M7B9KBA2crPuGnwn9ZqyIFBRYw9j5dKFgUIZJ8p/ivqkbQaeR+u4R0cSnLNg=='
